@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Wt & Rx">
+<meta name="theme-color" content="#0f0f0f">
+<title>Weight & Rx Tracker</title>
+
+<!-- Apple touch icon: syringe + scale -->
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0f0f0f;
+  --surface: #161616;
+  --surface2: #1c1c1c;
+  --border: #2a2a2a;
+  --text: #e8e8e8;
+  --muted: #555;
+  --green: #c8f5a0;
+  --blue: #7eb8f7;
+  --red: #ff7b7b;
+  --orange: #ff7b5c;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  overscroll-behavior: none;
+}
+
+/* ── LAYOUT ── */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.topbar-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.scroll-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── STATS ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 14px 14px 12px;
+  border-radius: 2px;
+}
+
+.stat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.stat-value.green { color: var(--green); }
+.stat-value.red   { color: var(--red); }
+.stat-value.blue  { color: var(--blue); }
+.stat-value.orange{ color: var(--orange); }
+
+.stat-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* ── CHART CARDS ── */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 2px;
+}
+
+.card-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.trend-chip {
+  background: rgba(200,245,160,0.08);
+  border: 1px solid rgba(200,245,160,0.2);
+  color: var(--green);
+  padding: 1px 7px;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  border-radius: 2px;
+}
+
+/* ── TABLE SECTION ── */
+.table-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.table-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.add-btn {
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 7px 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 2px;
+  -webkit-appearance: none;
+  min-height: 36px;
+}
+
+.add-btn:active { background: rgba(200,245,160,0.1); }
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+}
+
+thead th {
+  text-align: left;
+  padding: 8px 14px;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+tbody tr { border-bottom: 1px solid #1a1a1a; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:active { background: var(--surface2); }
+
+td {
+  padding: 9px 14px;
+  white-space: nowrap;
+}
+
+td.wt   { color: var(--green); font-weight: 500; }
+td.dose { color: var(--blue); }
+td.dn   { color: var(--green); }
+td.dp   { color: var(--red); }
+td.dz   { color: var(--muted); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: #1a1a1a;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  padding: 24px 20px;
+  padding-bottom: calc(24px + var(--safe-bottom));
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px 12px 0 0;
+  animation: slideup 0.22s ease-out;
+}
+
+@keyframes slideup {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.modal-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+
+.form-group { margin-bottom: 14px; }
+
+.form-group label {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  outline: none;
+  border-radius: 2px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group input:focus { border-color: var(--green); }
+
+.modal-btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-save {
+  flex: 1;
+  background: var(--green);
+  color: #0f0f0f;
+  border: none;
+  padding: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  min-height: 44px;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  min-height: 44px;
+}
+
+.bottom-spacer { height: 20px; flex-shrink: 0; }
+td.cost-entry { color: #ff7b7b; font-weight: 500; }
+td.cost-zero   { color: var(--muted); font-size: 0.7rem; }
+td.cost-total  { color: var(--green); font-weight: 500; }
+
+/* Responsive wider screens */
+@media (min-width: 600px) {
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  .stat-value { font-size: 1.4rem; }
+  .scroll-body { padding: 24px; max-width: 800px; margin: 0 auto; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">Wt &amp; Rx</div>
+    </div>
+    <div class="topbar-sub" id="last-updated">—</div>
+  </div>
+
+  <div class="scroll-body">
+    <div class="stats-grid" id="stats-grid"></div>
+
+    <div class="chart-card">
+      <div class="card-label">
+        Weight (lbs)
+        <span class="trend-chip" id="trend-chip">—</span>
+      </div>
+      <canvas id="weightChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <div class="card-label">Dose (mg)</div>
+      <canvas id="doseChart"></canvas>
+    </div>
+
+    <div class="table-card">
+      <div class="table-header">
+        <span class="table-title">All Entries</span>
+        <button class="add-btn" onclick="openModal()">+ Add</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Weight</th>
+              <th>Δ</th>
+              <th>Dose</th>
+              <th>Total Δ</th>
+            </tr>
+          </thead>
+          <tbody id="tbl"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-card" style="margin-top:0">
+      <div class="table-header">
+        <span class="table-title">Rx Cost Tally</span>
+        <span class="topbar-sub" id="cost-grand-total"></span>
+      </div>
+      <div class="table-wrap" id="cost-tally"></div>
+    </div>
+    <div class="bottom-spacer"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-title">New Entry</div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" id="inp-date">
+    </div>
+    <div class="form-group">
+      <label>Weight (lbs)</label>
+      <input type="number" id="inp-weight" step="0.1" inputmode="decimal" placeholder="237.6">
+    </div>
+    <div class="form-group">
+      <label>Dose (mg)</label>
+      <input type="number" id="inp-dose" step="0.5" inputmode="decimal" placeholder="10">
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveEntry()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── REGISTER INLINE SERVICE WORKER FOR PWA INSTALLABILITY ──
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    const CACHE = 'wt-rx-v1';
+    const ASSETS = [self.location.href];
+    self.addEventListener('install', e => {
+      e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+      self.skipWaiting();
+    });
+    self.addEventListener('activate', e => {
+      e.waitUntil(caches.keys().then(keys =>
+        Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+      ));
+      self.clients.claim();
+    });
+    self.addEventListener('fetch', e => {
+      e.respondWith(
+        caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match(e.request)))
+      );
+    });
+  `;
+  const blob = new Blob([swCode], { type: 'application/javascript' });
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(() => {});
+}
+
+// ── DATA ──
+const SEED = [
+  { date: '2025-10-01', weight: 264.6, dose: 2.5 },
+  { date: '2025-10-22', weight: 258.6, dose: 3.5 },
+  { date: '2025-10-30', weight: 256.0, dose: 5.0 },
+  { date: '2025-11-06', weight: 256.4, dose: 5.0 },
+  { date: '2025-11-13', weight: 255.8, dose: 6.0 },
+  { date: '2025-11-21', weight: 251.8, dose: 6.5 },
+  { date: '2025-11-29', weight: 250.0, dose: 7.5 },
+  { date: '2025-12-04', weight: 251.6, dose: 8.0 },
+  { date: '2025-12-11', weight: 249.4, dose: 10.0 },
+  { date: '2025-12-18', weight: 248.4, dose: 10.0 },
+  { date: '2025-12-25', weight: 249.6, dose: 10.0 },
+  { date: '2026-01-01', weight: 245.6, dose: 10.0 },
+  { date: '2026-01-09', weight: 241.4, dose: 10.0 },
+  { date: '2026-01-18', weight: 241.4, dose: 10.0 },
+  { date: '2026-01-24', weight: 239.8, dose: 10.0 },
+  { date: '2026-01-31', weight: 240.6, dose: 7.5 },
+  { date: '2026-02-23', weight: 243.2, dose: 7.5 },
+  { date: '2026-03-05', weight: 242.2, dose: 7.5 },
+  { date: '2026-03-13', weight: 239.0, dose: 7.5 },
+  { date: '2026-03-29', weight: 242.2, dose: 7.5 },
+  { date: '2026-04-05', weight: 236.2, dose: 10.0 },
+  { date: '2026-04-12', weight: 237.6, dose: 10.0 },
+  { date: '2026-04-19', weight: 234.0, dose: 10.0 },
+];
+
+function loadData() {
+  try {
+    const stored = localStorage.getItem('wt-rx-entries');
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed) && parsed.length >= SEED.length) return parsed;
+    }
+  } catch(e) {}
+  return [...SEED];
+}
+
+function saveData() {
+  try { localStorage.setItem('wt-rx-entries', JSON.stringify(data)); } catch(e) {}
+}
+
+let data = loadData();
+let wChart, dChart;
+
+// ── UTILS ──
+function fmt(d) {
+  const [y,m,day] = d.split('-');
+  return `${parseInt(m)}/${parseInt(day)}/${y.slice(2)}`;
+}
+
+function linReg(pts) {
+  const n = pts.length;
+  let sx=0, sy=0, sxy=0, sx2=0;
+  pts.forEach((p,i) => { sx+=i; sy+=p; sxy+=i*p; sx2+=i*i; });
+  const slope = (n*sxy - sx*sy) / (n*sx2 - sx*sx);
+  const intercept = (sy - slope*sx) / n;
+  return { slope, intercept };
+}
+
+// ── RENDER ──
+function calcCost() {
+  // <10mg: $180 per complete set of 4
+  // >=10mg: $300 per complete set of 4
+  const sorted = [...data].sort((a,b) => a.date.localeCompare(b.date));
+  let countLow = 0, countHigh = 0, total = 0;
+  sorted.forEach(e => {
+    if (e.dose < 10) {
+      countLow++;
+      if (countLow % 4 === 0) total += 180;
+    } else {
+      countHigh++;
+      if (countHigh % 4 === 0) total += 300;
+    }
+  });
+  return total;
+}
+
+function renderCostTally() {
+  const sorted = [...data].sort((a,b) => a.date.localeCompare(b.date));
+  let total = 0;
+  let countLow = 0, countHigh = 0;
+  let rows = '';
+  sorted.forEach(e => {
+    let entryCost = 0;
+    let note = '';
+    if (e.dose < 10) {
+      countLow++;
+      if (countLow % 4 === 0) {
+        entryCost = 180;
+        note = '+$180 (set of 4)';
+      } else {
+        note = `(${countLow % 4}/4)`;
+      }
+    } else {
+      countHigh++;
+      if (countHigh % 4 === 0) {
+        entryCost = 300;
+        note = '+$300 (set of 4)';
+      } else {
+        note = `(${countHigh % 4}/4)`;
+      }
+    }
+    total += entryCost;
+    const costClass = entryCost > 0 ? 'cost-entry' : 'cost-zero';
+    rows += `<tr>
+      <td>${fmt(e.date)}</td>
+      <td class="dose">${e.dose}mg</td>
+      <td class="${costClass}">${note}</td>
+      <td class="cost-total">$${total.toLocaleString()}</td>
+    </tr>`;
+  });
+  return `<table>
+    <thead><tr>
+      <th>Date</th><th>Dose</th><th>Entry Cost</th><th>Running Total</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+function render() {
+  data.sort((a,b) => a.date.localeCompare(b.date));
+  renderStats();
+  renderCharts();
+  renderTable();
+  renderCostSection();
+  const last = data[data.length-1];
+  document.getElementById('last-updated').textContent = fmt(last.date);
+}
+
+function renderCostSection() {
+  const tallyEl = document.getElementById('cost-tally');
+  const totalEl = document.getElementById('cost-grand-total');
+  if (!tallyEl || !totalEl) return;
+  tallyEl.innerHTML = renderCostTally();
+  totalEl.textContent = '$' + calcCost().toLocaleString() + ' total';
+}
+
+function renderStats() {
+  const first = data[0].weight;
+  const last = data[data.length-1].weight;
+  const lost = first - last;
+  const pct = ((lost/first)*100).toFixed(1);
+  const days = Math.round((new Date(data[data.length-1].date) - new Date(data[0].date)) / 86400000);
+  const rateWk = (lost/(days/7)).toFixed(2);
+  const curDose = data[data.length-1].dose;
+
+  document.getElementById('stats-grid').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">Start</div>
+      <div class="stat-value blue">${first}</div>
+      <div class="stat-sub">${fmt(data[0].date)}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Current</div>
+      <div class="stat-value green">${last}</div>
+      <div class="stat-sub">${fmt(data[data.length-1].date)}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Lost</div>
+      <div class="stat-value ${lost>0?'green':'red'}">${lost>0?'-':'+'}${Math.abs(lost).toFixed(1)}</div>
+      <div class="stat-sub">${pct}% · ${days}d</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Avg / Wk</div>
+      <div class="stat-value orange">-${Math.abs(rateWk)}</div>
+      <div class="stat-sub">lbs · ${curDose}mg now</div>
+    </div>
+  `;
+}
+
+function renderCharts() {
+  const labels = data.map(d => fmt(d.date));
+  const weights = data.map(d => d.weight);
+  const doses = data.map(d => d.dose);
+  const reg = linReg(weights);
+  const trend = weights.map((_,i) => +(reg.intercept + reg.slope*i).toFixed(2));
+
+  document.getElementById('trend-chip').textContent =
+    `${reg.slope < 0 ? '↓' : '↑'} ${Math.abs(reg.slope).toFixed(2)} lbs/entry`;
+
+  const grid = 'rgba(255,255,255,0.04)';
+  const tick = '#444';
+  const mono = 'IBM Plex Mono';
+
+  if (wChart) wChart.destroy();
+  if (dChart) dChart.destroy();
+
+  wChart = new Chart(document.getElementById('weightChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Weight',
+          data: weights,
+          borderColor: '#c8f5a0',
+          backgroundColor: 'rgba(200,245,160,0.05)',
+          pointBackgroundColor: '#c8f5a0',
+          pointRadius: 3.5,
+          pointHoverRadius: 6,
+          tension: 0.3,
+          fill: true,
+          borderWidth: 2,
+          order: 2,
+        },
+        {
+          label: 'Trend',
+          data: trend,
+          borderColor: '#ff7b5c',
+          borderWidth: 2,
+          borderDash: [5, 4],
+          pointRadius: 0,
+          tension: 0,
+          fill: false,
+          order: 1,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { labels: { color:'#666', font:{family:mono,size:10}, boxWidth:16, padding:12 } },
+        tooltip: {
+          backgroundColor: '#1c1c1c',
+          borderColor: '#333',
+          borderWidth: 1,
+          titleColor: '#999',
+          bodyColor: '#e8e8e8',
+          titleFont: { family:mono },
+          bodyFont:  { family:mono },
+          callbacks: {
+            afterBody: items => `Dose: ${doses[items[0].dataIndex]} mg`
+          }
+        }
+      },
+      scales: {
+        x: { ticks:{color:tick,font:{family:mono,size:9},maxRotation:45,maxTicksLimit:8}, grid:{color:grid} },
+        y: {
+          ticks: { color:tick, font:{family:mono,size:9} },
+          grid: { color:grid },
+          min: Math.floor(Math.min(...weights)-4),
+          max: Math.ceil(Math.max(...weights)+2),
+        }
+      }
+    }
+  });
+
+  dChart = new Chart(document.getElementById('doseChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: doses,
+        backgroundColor: 'rgba(126,184,247,0.25)',
+        borderColor: '#7eb8f7',
+        borderWidth: 1,
+        borderRadius: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1c1c1c',
+          borderColor: '#333',
+          borderWidth: 1,
+          titleColor: '#999',
+          bodyColor: '#e8e8e8',
+          titleFont: { family:mono },
+          bodyFont:  { family:mono },
+        }
+      },
+      scales: {
+        x: { ticks:{color:tick,font:{family:mono,size:9},maxRotation:45,maxTicksLimit:8}, grid:{color:grid} },
+        y: { ticks:{color:tick,font:{family:mono,size:9}}, grid:{color:grid}, min:0 }
+      }
+    }
+  });
+}
+
+function renderTable() {
+  const start = data[0].weight;
+  let rows = '';
+  data.slice().reverse().forEach((e, ri) => {
+    const idx = data.length - 1 - ri;
+    const prev = idx > 0 ? data[idx-1].weight : null;
+    const rawDelta = prev !== null ? (e.weight - prev) : null;
+    const cumDelta = e.weight - start;
+
+    const deltaStr = rawDelta === null ? '—'
+      : rawDelta < 0 ? rawDelta.toFixed(1)
+      : rawDelta > 0 ? '+' + rawDelta.toFixed(1) : '0.0';
+    const deltaClass = rawDelta === null ? 'dz'
+      : rawDelta < 0 ? 'dn' : rawDelta > 0 ? 'dp' : 'dz';
+
+    const cumStr = cumDelta < 0 ? cumDelta.toFixed(1) : '+' + cumDelta.toFixed(1);
+    const cumClass = cumDelta < 0 ? 'dn' : cumDelta > 0 ? 'dp' : 'dz';
+
+    rows += `<tr>
+      <td>${fmt(e.date)}</td>
+      <td class="wt">${e.weight}</td>
+      <td class="${deltaClass}">${deltaStr}</td>
+      <td class="dose">${e.dose}</td>
+      <td class="${cumClass}">${cumStr}</td>
+    </tr>`;
+  });
+  document.getElementById('tbl').innerHTML = rows;
+}
+
+// ── MODAL ──
+function openModal() {
+  const today = new Date().toLocaleDateString('en-CA');
+  document.getElementById('inp-date').value = today;
+  document.getElementById('inp-weight').value = '';
+  document.getElementById('inp-dose').value = '';
+  document.getElementById('modal-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('inp-weight').focus(), 300);
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+function saveEntry() {
+  const d = document.getElementById('inp-date').value;
+  const w = parseFloat(document.getElementById('inp-weight').value);
+  const dose = parseFloat(document.getElementById('inp-dose').value);
+  if (!d || isNaN(w) || isNaN(dose)) {
+    alert('All three fields are required.');
+    return;
+  }
+  // Replace if same date exists
+  const existing = data.findIndex(e => e.date === d);
+  if (existing >= 0) {
+    if (!confirm(`Entry for ${fmt(d)} already exists. Replace it?`)) return;
+    data[existing] = { date:d, weight:w, dose };
+  } else {
+    data.push({ date:d, weight:w, dose });
+  }
+  saveData();
+  closeModal();
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
